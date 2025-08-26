@@ -1,8 +1,11 @@
+server:
+  port: 8082
+
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/core_english_school
-    username: user_core_english_school
-    password: core_english_schoolPW
+    url: jdbc:mysql://localhost:3307/progress_tracker
+    username: user_progress_tracker
+    password: progress_trackerPW
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -18,22 +21,14 @@ spring:
     locations: classpath:db/migration
 
   kafka:
-    bootstrap-servers: localhost:9092
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-      properties:
-        schema.registry.url: http://localhost:8081
-        acks: all
-        retries: 10
-        enable.idempotence: true
+    bootstrap-servers: kafka:9092
     consumer:
-      group-id: progress-tracker
-      auto-offset-reset: earliest
+      group-id: lesson-consumer-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       properties:
-        schema.registry.url: http://localhost:8081
+        schema.registry.url: http://schema-registry:8081
         specific.avro.reader: true
+
 topics:
   student-lesson-progress: student.lesson.progress

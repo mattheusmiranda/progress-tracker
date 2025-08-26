@@ -10,5 +10,5 @@ use core_english_school;
 show tables;
 
 -- matar containers
-docker stop my-mysql
-docker rm my-mysql
+docker stop my-mysql-progress-tracker
+docker rm my-mysql-progress-tracker

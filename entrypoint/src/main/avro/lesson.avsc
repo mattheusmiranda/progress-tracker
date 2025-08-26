@@ -1,0 +1,19 @@
+{
+  "type": "record",
+  "name": "LessonRecord",
+  "namespace": "com.school.avro",
+  "fields": [
+    { "name": "id", "type": "int" },
+    { "name": "courseId", "type": "int" },
+    { "name": "title", "type": "string" },
+    { "name": "durationSeconds", "type": "int" },
+    {
+      "name": "createdAt",
+      "type": { "type": "int", "logicalType": "date" }
+    },
+    {
+      "name": "updatedAt",
+      "type": { "type": "int", "logicalType": "date" }
+    }
+  ]
+}

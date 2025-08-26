@@ -1,0 +1,19 @@
+{
+  "type": "record",
+  "name": "StudentRecord",
+  "namespace": "com.school.avro",
+  "fields": [
+    { "name": "id", "type": "int" },
+    { "name": "name", "type": "string" },
+    { "name": "email", "type": "string" },
+    {
+      "name": "createdAt",
+      "type": [ "null", { "type": "int", "logicalType": "date" } ],
+      "default": null
+    },
+    {
+      "name": "updatedAt",
+      "type": { "type": "int", "logicalType": "date" }
+    }
+  ]
+}

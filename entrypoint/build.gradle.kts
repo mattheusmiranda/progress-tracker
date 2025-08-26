@@ -39,7 +39,7 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDirs("build/generated-main-avro-java")
+            srcDirs("build/generated-main-avro-java/main")
         }
     }
 }
