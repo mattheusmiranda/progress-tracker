@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mysql-progress:
     image: mysql:8.0.22
