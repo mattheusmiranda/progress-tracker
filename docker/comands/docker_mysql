@@ -6,7 +6,7 @@ docker-compose up -d
 docker exec -it my-mysql bash
 mysql -u root -p
 root
-use core_english_school;
+use my-mysql-progress-tracker;
 show tables;
 
 -- matar containers
