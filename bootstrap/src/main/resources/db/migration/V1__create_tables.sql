@@ -41,12 +41,14 @@ CREATE TABLE lessons (
 
 -- Tabela para armazenar progresso do aluno em cada lição
 CREATE TABLE student_lessons_progress (
+    id INT AUTO_INCREMENT,
     student_id INT NOT NULL,
     lesson_id INT NOT NULL,
     percentage_of_progress INT,
     completed_at TIMESTAMP NULL,
-    PRIMARY KEY (student_id, lesson_id),
-    CONSTRAINT fk_student_lesson_progress FOREIGN KEY (student_id) REFERENCES students(id),
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_student_lesson (student_id, lesson_id), -- Added a UNIQUE constraint for the progress combination
+    CONSTRAINT fk_student_lessons_progress FOREIGN KEY (student_id) REFERENCES students(id),
     CONSTRAINT fk_lesson_progress FOREIGN KEY (lesson_id) REFERENCES lessons(id)
 );
 

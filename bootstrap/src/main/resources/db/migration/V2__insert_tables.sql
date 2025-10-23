@@ -19,10 +19,10 @@ INSERT INTO student_courses (student_id, course_id, enrolled_at, status) VALUES
 (2, 1, NOW(), 'enrolled');
 
 -- Progresso em lições
-INSERT INTO student_lessons_progress (student_id, lesson_id, completed_at) VALUES
-(1, 1, NOW()),
-(1, 2, NOW()),
-(2, 1, NOW());
+INSERT INTO student_lessons_progress (student_id, lesson_id, percentage_of_progress, completed_at) VALUES
+(1, 1, 5, NOW()),
+(1, 2, 2, NOW()),
+(2, 1, 20, NOW());
 
 -- Progresso geral no curso
 INSERT INTO student_progress (student_id, course_id, progress_percent, last_updated) VALUES

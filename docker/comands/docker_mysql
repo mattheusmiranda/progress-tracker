@@ -3,11 +3,12 @@ cd docker
 docker-compose up -d
 
 -- entrar no container
-docker exec -it my-mysql bash
+docker exec -it my-mysql-progress-tracker bash
 mysql -u root -p
 root
-use my-mysql-progress-tracker;
+use progress_tracker;
 show tables;
+select * from student_lessons_progress;
 
 -- matar containers
 docker stop my-mysql-progress-tracker
