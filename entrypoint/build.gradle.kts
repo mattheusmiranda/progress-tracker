@@ -24,10 +24,10 @@ dependencies {
     implementation("org.apache.avro:avro:1.11.1")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
-    implementation("org.mapstruct:mapstruct:1.5.5.Final")
     implementation("org.springframework.boot:spring-boot-starter-logging")
 
-    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
+    implementation("org.mapstruct:mapstruct:1.6.0")
+    kapt("org.mapstruct:mapstruct-processor:1.6.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.5.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

@@ -31,5 +31,5 @@ data class StudentLessonProgress(
     val percentageOfProgress: Int,
 
     @Column(name = "completed_at")
-    val completedAt: LocalDateTime? = null
+    var completedAt: LocalDateTime? = null
 )
