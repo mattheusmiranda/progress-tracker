@@ -4,6 +4,7 @@ import com.school.avro.StudentLessonProgressRecord
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.annotation.EnableKafka
@@ -13,18 +14,19 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 
 @EnableKafka
 @Configuration
-class KafkaConsumerConfig {
+class KafkaConsumerConfig(
+    private val kafkaProperties: KafkaProperties
+) {
 
     @Bean
     fun consumerFactory(): ConsumerFactory<String, StudentLessonProgressRecord> {
-        val props = mapOf(
-            ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to "localhost:9092",
-            ConsumerConfig.GROUP_ID_CONFIG to "lesson-consumer-group",
-            ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
-            ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to KafkaAvroDeserializer::class.java,
-            "schema.registry.url" to "http://localhost:8081",
-            "specific.avro.reader" to true
-        )
+
+        val props = kafkaProperties.buildConsumerProperties()
+
+        props[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
+        props[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = KafkaAvroDeserializer::class.java
+
+        props["specific.avro.reader"] = true
 
         return DefaultKafkaConsumerFactory(props)
     }

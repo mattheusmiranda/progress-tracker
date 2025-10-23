@@ -12,7 +12,7 @@ class LessonCompletedConsumer {
     private val logger = LoggerFactory.getLogger(LessonCompletedConsumer::class.java)
 
     @KafkaListener(
-        topics = ["lesson-completed"],
+        topics = ["lesson_completed"],
         groupId = "lesson-consumer-group",
         containerFactory = "kafkaListenerContainerFactory"
     )
@@ -20,7 +20,7 @@ class LessonCompletedConsumer {
         val key = record.key()
         val value = record.value()
 
-        logger.info("Consumo do tópico 'lesson-completed'")
+        logger.info("Consumo do tópico 'lesson_completed'")
         logger.info("Key: $key")
         logger.info("Student ID: ${value.studentRecord.id}")
         logger.info("Lesson ID: ${value.lessonRecord.id}")
