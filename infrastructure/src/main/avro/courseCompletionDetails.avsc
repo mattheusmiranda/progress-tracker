@@ -1,0 +1,38 @@
+{
+  "type": "record",
+  "name": "CourseCompletionDetailsRecord",
+  "namespace": "com.school.avro",
+  "doc": "Armazena os detalhes de conclusão de um curso.",
+  "fields": [
+    {
+      "name": "studentLessonProgressId",
+      "type": "int",
+      "doc": "Id do progresso."
+    },
+    {
+      "name": "totalClasses",
+      "type": "int",
+      "doc": "O número total de aulas do curso."
+    },
+    {
+      "name": "completedClasses",
+      "type": "int",
+      "doc": "O número de aulas já concluídas."
+    },
+    {
+      "name": "remainingClasses",
+      "type": "int",
+      "doc": "O número de aulas que faltam."
+    },
+    {
+      "name": "percentageCompleted",
+      "type": "double",
+      "doc": "A porcentagem do curso que está concluída (0.0 a 100.0)."
+    },
+    {
+      "name": "percentageRemaining",
+      "type": "double",
+      "doc": "A porcentagem do curso que falta ser concluída (0.0 a 100.0)."
+    }
+  ]
+}

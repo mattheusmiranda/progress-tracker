@@ -24,8 +24,17 @@ spring:
 
   kafka:
     bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        schema.registry.url: http://schema-registry:8081
+        acks: all
+        retries: 10
+        enable.idempotence: true
     consumer:
       group-id: lesson-consumer-group
+      auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       properties:
@@ -34,3 +43,4 @@ spring:
 
 topics:
   student-lesson-progress: lesson_completed
+  student-progress-updated: student_progress_updated

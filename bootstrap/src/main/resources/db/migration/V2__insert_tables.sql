@@ -4,8 +4,8 @@ INSERT INTO students (name, email) VALUES
 ('Bob Smith', 'bob.smith@example.com');
 
 -- Inserts na tabela courses
-INSERT INTO courses (title, description) VALUES
-('English Basics', 'Introductory course covering basic English grammar and vocabulary.');
+INSERT INTO courses (title, description, total_number_of_classes) VALUES
+('English Basics', 'Introductory course covering basic English grammar and vocabulary.', 60);
 
 -- Inserts na tabela lessons (associadas ao curso)
 INSERT INTO lessons (course_id, title, duration_seconds, sequence) VALUES
