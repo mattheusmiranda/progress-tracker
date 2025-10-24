@@ -1,7 +1,7 @@
 package com.school.port.output
 
-import com.school.domain.CourseCompletionDetails
+import com.school.domain.CourseCompletionDetailsDomain
 
 interface StudentProgressUpdatedEventPublisher {
-    fun publish(courseCompletionDetails: CourseCompletionDetails)
+    fun publish(courseCompletionDetailsDomain: CourseCompletionDetailsDomain)
 }

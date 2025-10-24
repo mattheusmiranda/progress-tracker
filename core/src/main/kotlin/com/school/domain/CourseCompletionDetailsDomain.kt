@@ -1,6 +1,6 @@
 package com.school.domain
 
-data class CourseCompletionDetails(
+data class CourseCompletionDetailsDomain(
     val studentLessonProgressId: Int,
     val totalClasses: Int,
     val completedClasses: Int,

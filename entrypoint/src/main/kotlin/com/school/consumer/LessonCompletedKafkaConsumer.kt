@@ -5,6 +5,7 @@ import com.school.mapper.LessonCompletedConsumerManualMapper
 import com.school.usecase.LessonCompletedConsumerService
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.LoggerFactory
+import org.slf4j.MDC
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
@@ -29,11 +30,11 @@ class LessonCompletedConsumer(
 
 
     fun toLog(record: ConsumerRecord<String, StudentLessonProgressRecord>) {
-        logger.info("Consumo do tópico 'lesson_completed'")
-        logger.info("Key: ${record.key()}")
-        logger.info("Student ID: ${record.value().studentRecord.id}")
-        logger.info("Lesson ID: ${record.value().lessonRecord.id}")
-        logger.info("Completed At: ${record.value().completedAt}")
+        MDC.put("key", record.key())
+        MDC.put("studentId", record.value().studentRecord.id.toString())
+        MDC.put("lessonId", record.value().lessonRecord.id.toString())
+        MDC.put("completedAt", record.value().completedAt.toString())
+        logger.info("Topic consumption 'lesson_completed'")
     }
 
 }

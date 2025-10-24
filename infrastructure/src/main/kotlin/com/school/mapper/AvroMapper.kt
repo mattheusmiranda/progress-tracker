@@ -1,19 +1,19 @@
 package com.school.mapper
 
 import com.school.avro.CourseCompletionDetailsRecord
-import com.school.domain.CourseCompletionDetails
+import com.school.domain.CourseCompletionDetailsDomain
 import org.springframework.stereotype.Component
 
 @Component
 class AvroMapper {
-    fun toCourseCompletionDetailsAvro(courseCompletionDetails: CourseCompletionDetails) : CourseCompletionDetailsRecord {
+    fun toCourseCompletionDetailsAvro(courseCompletionDetailsDomain: CourseCompletionDetailsDomain) : CourseCompletionDetailsRecord {
         return CourseCompletionDetailsRecord.newBuilder()
-            .setStudentLessonProgressId(courseCompletionDetails.studentLessonProgressId)
-            .setTotalClasses(courseCompletionDetails.totalClasses)
-            .setCompletedClasses(courseCompletionDetails.completedClasses)
-            .setRemainingClasses(courseCompletionDetails.remainingClasses)
-            .setPercentageCompleted(courseCompletionDetails.percentageCompleted)
-            .setPercentageRemaining(courseCompletionDetails.percentageRemaining)
+            .setStudentLessonProgressId(courseCompletionDetailsDomain.studentLessonProgressId)
+            .setTotalClasses(courseCompletionDetailsDomain.totalClasses)
+            .setCompletedClasses(courseCompletionDetailsDomain.completedClasses)
+            .setRemainingClasses(courseCompletionDetailsDomain.remainingClasses)
+            .setPercentageCompleted(courseCompletionDetailsDomain.percentageCompleted)
+            .setPercentageRemaining(courseCompletionDetailsDomain.percentageRemaining)
             .build()
     }
 }

@@ -2,7 +2,7 @@ package com.school.producer
 
 import com.school.avro.CourseCompletionDetailsRecord
 import com.school.config.KafkaTopicsConfig
-import com.school.domain.CourseCompletionDetails
+import com.school.domain.CourseCompletionDetailsDomain
 import com.school.mapper.AvroMapper
 import com.school.port.output.StudentProgressUpdatedEventPublisher
 import org.slf4j.LoggerFactory
@@ -21,29 +21,27 @@ class CourseCompletionDetailsKafkaProducer(
 
     private val topic = kafkaTopicsConfig.studentProgressUpdated
 
-    override fun publish(courseCompletionDetails: CourseCompletionDetails) {
+    override fun publish(courseCompletionDetailsDomain: CourseCompletionDetailsDomain) {
         try {
-            val avroRecord = avroMapper.toCourseCompletionDetailsAvro(courseCompletionDetails)
-            kafkaTemplate.send(topic, courseCompletionDetails.studentLessonProgressId.toString(), avroRecord)
+            toLog(courseCompletionDetailsDomain)
+            val avroRecord = avroMapper.toCourseCompletionDetailsAvro(courseCompletionDetailsDomain)
+            kafkaTemplate.send(topic, courseCompletionDetailsDomain.studentLessonProgressId.toString(), avroRecord)
 
-            logger.info(
-                "message=\"Course completion event successfully published\" " +
-                        "topic=\"$topic\" " +
-                        "totalClasses=${courseCompletionDetails.totalClasses} " +
-                        "completedClasses=${courseCompletionDetails.completedClasses} " +
-                        "percentageCompleted=${courseCompletionDetails.percentageCompleted}"
-            )
+            logger.info("Course completion event successfully published")
         } catch (e: Exception) {
-            logger.error(
-                "message=\"Failed to publish course completion event\" " +
-                        "topic=\"$topic\" " +
-                        "completedClasses=${courseCompletionDetails.completedClasses} " +
-                        "percentageCompleted=${courseCompletionDetails.percentageCompleted}",
-                e
-            )
+            logger.error("Failed to publish course completion event", e)
         } finally {
             MDC.clear()
         }
     }
+
+    fun toLog(courseCompletionDetailsDomain: CourseCompletionDetailsDomain) {
+        MDC.put("topic", topic)
+        MDC.put("studentLessonProgressId", courseCompletionDetailsDomain.studentLessonProgressId.toString())
+        MDC.put("totalClasses", courseCompletionDetailsDomain.totalClasses.toString())
+        MDC.put("completedClasses", courseCompletionDetailsDomain.completedClasses.toString())
+        MDC.put("percentageCompleted", courseCompletionDetailsDomain.percentageCompleted.toString())
+    }
+
 
 }
